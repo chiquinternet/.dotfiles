@@ -8,9 +8,7 @@ local colors = require("themes.colors")
 
 local dpi = beautiful.xresources.apply_dpi
 
--- Function to create a slider widget (volume or brightness)
 local function create_slider_widget(command, icon_code, initial_value, max_value)
-	-- Create the slider widget
 	local slider = wibox.widget({
 		widget = wibox.widget.slider,
 		bar_shape = helpers.rrect(0),
@@ -23,8 +21,8 @@ local function create_slider_widget(command, icon_code, initial_value, max_value
 		handle_border_width = 3,
 		handle_border_color = colors.bg_dim,
 		minimum = 0,
-		maximum = max_value or 100, -- default max value
-		value = initial_value or 50, -- default initial value
+		maximum = max_value or 100,
+		value = initial_value or 50,
 	})
 
 	local value_tooltip = awful.tooltip({
@@ -37,17 +35,28 @@ local function create_slider_widget(command, icon_code, initial_value, max_value
 
 	value_tooltip:add_to_object(slider)
 
-	-- Set the value when the slider is moved
 	slider:connect_signal("property::value", function(slider)
 		local level = math.floor(slider.value / 100 * max_value)
 		awful.spawn(command .. " " .. level .. "%")
 		value_tooltip.text = tostring(slider.value)
 	end)
 
-	-- Icon for the slider
+	slider:connect_signal("mouse::enter", function()
+		local w = mouse.current_wibox
+		if w then
+			w.cursor = "hand1"
+		end
+	end)
+
+	slider:connect_signal("mouse::leave", function()
+		local w = mouse.current_wibox
+		if w then
+			w.cursor = "left_ptr"
+		end
+	end)
+
 	local icon = helpers.margin(helpers.textbox(colors.orange, "Ubuntu Nerd Font bold 30", icon_code), 0, 15, 5, 5)
 
-	-- Final widget layout with icon, slider, and value display
 	local final_widget = wibox.widget({
 		{
 			icon,

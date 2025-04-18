@@ -3,19 +3,17 @@ local beautiful = require('beautiful')
 
 local header = require('layout.panel.control_center.header')
 local buttons = require('layout.panel.control_center.buttons')
-local vol_slider = require('layout.panel.control_center.vol_slider')
-local bright_slider = require('layout.panel.control_center.bright_slider')
+local sliders = require('layout.panel.control_center.sliders')
 local notif_center = require('layout.panel.control_center.notif_center')
 local media_player = require('layout.panel.control_center.media_player')
 
 local cc = wibox.widget {
- header,
- buttons,
- bright_slider,
- vol_slider,
- --media_player,
- notif_center,
- layout = wibox.layout.fixed.vertical,
+	header,
+	buttons.main,
+	sliders,
+  media_player,
+	notif_center,
+	layout = wibox.layout.fixed.vertical,
 }
 
 return cc

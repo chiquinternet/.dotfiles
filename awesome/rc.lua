@@ -7,6 +7,8 @@ pcall(require, 'luarocks.loader')
 local beautiful = require 'beautiful'
 beautiful.init("~/.config/awesome/themes/theme.lua")
 
+local awful = require 'awful'
+
 -- load key and mouse bindings
 require 'bindings'
 require 'rules'
@@ -28,3 +30,5 @@ require 'popups.ss_tool'
 require 'popups.powermenu'
 require 'popups.color_picker'
 -- require 'braindamage'
+
+awful.screen.focus (screen[1])

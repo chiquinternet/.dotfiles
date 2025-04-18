@@ -142,6 +142,20 @@ playerctl:connect_signal("position", function(_, interval_sec, length_sec)
 	end
 end)
 
+media_slider:connect_signal("mouse::enter", function()
+	local w = mouse.current_wibox
+	if w then
+		w.cursor = "hand1"
+	end
+end)
+
+media_slider:connect_signal("mouse::leave", function()
+	local w = mouse.current_wibox
+	if w then
+		w.cursor = "left_ptr"
+	end
+end)
+
 local create_container = function(wgt)
 	local btn = helpers.margin(
 		wibox.widget({
@@ -156,6 +170,20 @@ local create_container = function(wgt)
 
 	btn.forced_height = dpi(45)
 	btn.forced_width = dpi(45)
+
+	btn:connect_signal("mouse::enter", function()
+		local w = mouse.current_wibox
+		if w then
+			w.cursor = "hand1"
+		end
+	end)
+
+	btn:connect_signal("mouse::leave", function()
+		local w = mouse.current_wibox
+		if w then
+			w.cursor = "left_ptr"
+		end
+	end)
 
 	local container = wibox.widget({
 		btn,
@@ -224,7 +252,12 @@ local mplayer_widget = wibox.widget({
 				layout = wibox.layout.align.horizontal,
 			},
 			helpers.margin(media_slider, 0, 0, 10, 10),
-			helpers.margin({ position_text, nil, length_text, layout = wibox.layout.align.horizontal }, 0, 0, 0, 20),
+			helpers.margin({
+				position_text,
+				nil,
+				length_text,
+				layout = wibox.layout.align.horizontal,
+			}, 0, 0, 0, 20),
 			{
 				{
 					b15_btn,
