@@ -2,7 +2,7 @@ local user = {
 
 	--Profile
 	name         = "pom",
-	host         = "@201",
+	host         = "@tomato",
 	user_img     = os.getenv("HOME") .. "/.config/awesome/assets/user.png",
 
 	-- Default apps
@@ -10,6 +10,7 @@ local user = {
 	file_manager = "nautilus",
 	browser      = "firefox",
 	editor       = "nvim",
+	font         = "Ubuntu Nerd Font",
 
 	wallpaper    = "~/Pictures/Wallpapers/chiffoncinnamoroll.png",
 	icon_path    = os.getenv("HOME") .. "/.local/share/icons/Nordzy-pink/apps/scalable/",

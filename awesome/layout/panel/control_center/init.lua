@@ -13,7 +13,7 @@ local cc = wibox.widget {
  buttons,
  bright_slider,
  vol_slider,
- media_player,
+ --media_player,
  notif_center,
  layout = wibox.layout.fixed.vertical,
 }

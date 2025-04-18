@@ -1,7 +1,7 @@
-local gears = require 'gears'
-local awful = require 'awful'
-local wibox = require 'wibox'
-local beautiful = require 'beautiful'
+local gears = require("gears")
+local awful = require("awful")
+local wibox = require("wibox")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
 local helpers = {}
@@ -29,37 +29,55 @@ end
 ---Markup-------------------------
 ----------------------------------
 helpers.mtext = function(color, font, text)
-	return '<span color="' .. color .. '" font="' .. font .. '">' .. text .. '</span>'
+	return '<span color="' .. color .. '" font="' .. font .. '">' .. text .. "</span>"
 end
 
 ---widgets------------------------
 ----------------------------------
-helpers.textbox = function(color, font, text)
-	return wibox.widget {
-		markup = '<span color="' .. color .. '" font="' .. font .. '">' .. text .. '</span>',
-		widget = wibox.widget.textbox
-	}
+function helpers.textbox(color, font, text)
+	local widget = wibox.widget.textbox()
+
+	-- Store formatting properties
+	widget._text_format = { color = color, font = font }
+
+	-- Function to set text and reapply formatting
+	function widget:set_text(new_text)
+		-- Reapply the formatting via markup
+		local formatted_text = string.format(
+			'<span color="%s" font="%s">%s</span>',
+			self._text_format.color,
+			self._text_format.font,
+			new_text
+		)
+		-- Use set_markup to set both the style and the text
+		wibox.widget.textbox.set_markup(self, formatted_text)
+	end
+
+	-- Set the initial text with formatting
+	widget:set_text(text)
+
+	return widget
 end
 
 helpers.imagebox = function(img, height, width)
-	return wibox.widget {
+	return wibox.widget({
 		image = img,
 		resize = true,
 		forced_height = dpi(height),
 		forced_width = dpi(width),
-		widget = wibox.widget.imagebox
-	}
+		widget = wibox.widget.imagebox,
+	})
 end
 
 helpers.margin = function(wgt, ml, mr, mt, mb)
-	return wibox.widget {
+	return wibox.widget({
 		wgt,
 		widget = wibox.container.margin,
 		left = dpi(ml),
 		right = dpi(mr),
 		top = dpi(mt),
 		bottom = dpi(mb),
-	}
+	})
 end
 
 ---Hover_effects---------------------

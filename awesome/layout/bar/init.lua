@@ -96,6 +96,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 	-- s.bar:struts({ left = 50 })
 
+  if s.index == 1 then
 	--------------------------
 	--Side panel--------------
 	--------------------------
@@ -189,6 +190,7 @@ awful.screen.connect_for_each_screen(function(s)
 			end)
 		end
 	end)
+end
 end)
 
 --Slide bar signal

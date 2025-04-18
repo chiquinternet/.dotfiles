@@ -3,17 +3,17 @@ local menu = require 'popups.menu'
 local vars = require 'config.vars'
 
 awful.mouse.append_global_mousebindings {
-  awful.button {
-    modifiers = {},
-    button = 1,
-    on_press = function()
-      if mouse.coords().x > 450 and vars.open then
-        awesome.emit_signal("open::window")
-        vars.open = false
-        vars.current_panel = "none"
-      end
-    end
-  },
+  --awful.button {
+  --  modifiers = {},
+  --  button = 1,
+  --  on_press = function()
+  --    if mouse.coords().x > 450 and vars.open then
+  --      awesome.emit_signal("open::window")
+  --      vars.open = false
+  --      vars.current_panel = "none"
+  --    end
+  --  end
+  --},
   awful.button {
     modifiers = {},
     button    = 3,

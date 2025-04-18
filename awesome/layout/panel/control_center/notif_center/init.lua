@@ -1,3 +1,4 @@
+local user = require 'user'
 local awful = require('awful')
 local wibox = require('wibox')
 local beautiful = require('beautiful')
@@ -9,14 +10,14 @@ local color = require("themes.colors")
 
 local notifs = require('layout.panel.control_center.notif_center.notifs')
 
-local header_text = helpers.textbox(color.lightblue, "Ubuntu nerd font bold 18", "Notifications")
+local header_text = helpers.textbox(color.lightblue, user.font .. " bold 18", "Notifications")
 header_text.valign = 'center'
 header_text.forced_height = dpi(40)
 
 local btn = wibox.widget {
 	helpers.margin(
 		wibox.widget {
-			helpers.textbox(color.blue, "Ubuntu nerd font 18", '󰎟'),
+			helpers.textbox(color.blue, "Ubuntu Nerd Font 18", '󰎟'),
 			widget = wibox.container.place
 		},
 		8, 8, 8, 8
@@ -25,7 +26,7 @@ local btn = wibox.widget {
 	bg = color.bg_dark,
 	border_width = 3,
 	border_color = color.bg_dim,
-	shape = helpers.rrect(40, 40)
+	shape = helpers.rrect(0, 0)
 
 }
 
@@ -66,11 +67,11 @@ local notif_center = wibox.widget {
 		},
 		widget = wibox.container.background,
 		bg = color.bg_normal,
-		shape = helpers.rrect(15),
+		shape = helpers.rrect(0),
 	},
 	widget        = wibox.container.margin,
 	forced_width  = dpi(450),
-	forced_height = dpi(380),
+	forced_height = dpi(400),
 	top           = dpi(15),
 	left          = dpi(10),
 	right         = dpi(10)
